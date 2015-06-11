@@ -1,0 +1,38 @@
+{
+  "name": "es6-package-boilerplate",
+  "version": "0.0.1",
+  "description": "Module boilerplate for es6",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calebmorris/es6-package-boilerplate"
+  },
+  "scripts": {
+    "postinstall": "npm run dist",
+    "clean": "rm -Rf ./dist ./coverage",
+    "dist": "npm run clean && ./node_modules/.bin/babel src/ --modules common --out-dir dist",
+    "test": "./node_modules/.bin/mocha --recursive --compilers js:babel/register",
+    "lint": "./node_modules/.bin/eslint --ext .js .",
+    "lint-quiet": "./node_modules/.bin/eslint --ext .js --quiet .",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive --compilers js:babel/register"
+  },
+  "author": {
+    "name": "Caleb Morris",
+    "email": "caleb.morris.g@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^4.7.16",
+    "bluebird": "^2.9.21",
+    "joi": "^6.0.8",
+    "lodash": "^3.6.0"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "eslint": "^0.18.0",
+    "istanbul": "^0.3.13",
+    "mocha": "^2.2.1",
+    "sinon": "^1.14.1",
+    "proxyquire": "^1.4.0"
+  }
+}
