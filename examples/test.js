@@ -1,3 +1,5 @@
+var Promise = require('bluebird');
+
 var generate = require('../dist/endpointGenerator').generate;
 
 function base() {
