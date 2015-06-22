@@ -28,12 +28,29 @@ function generate(base, children) {
 
   children = children || [];
 
-  const wrappedFunc = () => {
+  const wrappedFunc = (...args) => {
+    const baseArguments = args;
+
+    let isLoaded = false;
     let shouldContinue = true;
+    let result = -333;
+
+    function baseResult(...args) {
+      if (shouldContinue) {
+        result = base(...args);
+      }
+      return result;
+    }
+
     let executionPromise = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(shouldContinue);
-      }, 0);
+      function checkLoaded() {
+        if (isLoaded) {
+          return resolve(baseResult(...baseArguments));
+        }
+        setTimeout(checkLoaded, 0);
+      }
+
+      checkLoaded();
     });
 
     _.each(children, (child) => {
@@ -45,17 +62,15 @@ function generate(base, children) {
         );
       }
 
-      executionPromise[funcName] = () => {
+      executionPromise[funcName] = (...args) => {
         shouldContinue = false;
-        child(arguments);
+        result = child(...args);
+        return Promise.resolve(result);
       };
     });
 
-    executionPromise.then((shouldContinue) => {
-      if (shouldContinue) {
-        base();
-      }
-    });
+
+    isLoaded = true;
 
     return executionPromise;
   };
