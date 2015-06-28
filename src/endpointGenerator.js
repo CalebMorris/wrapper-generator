@@ -30,11 +30,11 @@ function generate(base, children) {
 
     let isLoaded = false;
     let shouldContinue = true;
-    let result = -333;
+    let result = null;
 
-    function baseResult(...args) {
+    function baseResult(...baseResultArgs) {
       if (shouldContinue) {
-        result = base(...args);
+        result = base(...baseResultArgs);
       }
       return result;
     }

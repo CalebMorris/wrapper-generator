@@ -23,13 +23,13 @@ describe('endpointGenerator', () => {
 
       function base(inputValue) {
         expect(inputValue).to.equal(baseIn);
-        baseCount++;
+        baseCount += 1;
         return baseReturn;
       }
 
       function child(inputValue) {
         expect(inputValue).to.equal(childIn);
-        childCount++;
+        childCount += 1;
         return childReturn;
       }
 
@@ -42,7 +42,8 @@ describe('endpointGenerator', () => {
           const baseOut = base(baseIn);
           expect(baseOut).to.be.an('object');
           expect(baseOut.child).to.be.a('function');
-          return baseOut.child(childIn)
+
+          return baseOut.child(childIn);
         })
         .then((childValue) => {
           expect(childValue).to.equal(childReturn);
@@ -70,19 +71,19 @@ describe('endpointGenerator', () => {
 
       function base(inputValue) {
         expect(inputValue).to.equal(baseIn);
-        baseCount++;
+        baseCount += 1;
         return baseReturn;
       }
 
       function child(inputValue) {
         expect(inputValue).to.equal(childIn);
-        childCount++;
+        childCount += 1;
         return childReturn;
       }
 
       function grandchild(inputValue) {
         expect(inputValue).to.equal(grandChildIn);
-        grandchildCount++;
+        grandchildCount += 1;
         return grandchildReturn;
       }
 
@@ -97,7 +98,7 @@ describe('endpointGenerator', () => {
           expect(baseOut).to.be.an('object');
           expect(baseOut.child).to.be.a('function');
 
-          return baseOut.child(childIn)
+          return baseOut.child(childIn);
         })
         .then((childValue) => {
           expect(childValue).to.equal(childReturn);
