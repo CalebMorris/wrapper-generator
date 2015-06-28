@@ -1,8 +1,6 @@
 import _ from 'lodash';
 import Promise from 'bluebird';
 
-import { stripFunctionName } from './util';
-
 /*
  * Error for possibly common throw cases
  *   - Any function names are defined Promise attributes
@@ -14,12 +12,11 @@ function InvalidChildNameError(message = '') {
 }
 InvalidChildNameError.prototype = Error.prototype;
 
-
 /*
  * Generates the necessary chaining wrappers for a function and children
  * @param {Func} base - function that others may be called from in the form
  *  `base().child()`
- * @param {Array<Func>} chlidren - List of children functions to be generated as
+ * @param {Object<Func>} chlidren - List of children functions to be generated as
  * well
  * @throws InvalidChildNameError
  * @returns {Func} - Chained function
@@ -53,20 +50,20 @@ function generate(base, children) {
       checkLoaded();
     });
 
-    _.each(children, (child) => {
-      const funcName = stripFunctionName(child);
+    _.each(children, (child, name) => {
 
-      if (executionPromise.hasOwnProperty(funcName)) {
+      if (executionPromise.hasOwnProperty(name)) {
         throw new InvalidChildNameError(
-          `Property already attached to execution '${funcName}'`
+          `Property already attached to execution '${name}'`
         );
       }
 
-      executionPromise[funcName] = (...args) => {
+      executionPromise[name] = (...args) => {
         shouldContinue = false;
         result = child(...args);
         return Promise.resolve(result);
       };
+
     });
 
 
