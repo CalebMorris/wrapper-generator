@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
-import endpointGenerator from '../src/endpointGenerator';
+import endpointGenerator from '../src/endpoint-generator';
 
 function rand() {
   return Math.random().toString(36).substring(7);
