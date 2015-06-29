@@ -1,29 +1,30 @@
 # Wrapper Generator
 
-API Wrapper Generator and Function Chaining Generator
+API Wrapper Generator
 
 # NOTE
 
-Currently only a function chainer and doesn't wrap a full API yet
+Not currently working
 
-# Example - Function Chaining
+# Example - Wrap API
 
-```javascript
+Multiple methods
 
-var generate = require('wrapper-generator').generate;
+```javacript
 
-function base() {
-  console.log('BASE');
-}
+var wrap = require('wrapper-generator').wrap;
 
-function child() {
-  console.log('CHILD');
-}
+var wrappedAPI = wrap({
+  // '/'
+  handles : {
+    POST : {
+      validate : {},
+      handler : function() {},
+    },
+  },
+  children : {
 
-var base = generate(base, { child : child });
-
-base(); // Prints BASE
-base().child(); // Prints CHILD
-
+  }
+});
 
 ```
