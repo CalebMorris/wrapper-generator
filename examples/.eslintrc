@@ -1,0 +1,13 @@
+{
+  "env": {
+    "node": true,
+    "es6": false
+  },
+  "rules": {
+
+    "no-console": 0,
+    "no-var": [ 0 ],
+    "no-inline-comments": [ 0 ]
+
+  }
+}
