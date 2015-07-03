@@ -13,18 +13,37 @@ Multiple methods
 ```javacript
 
 var wrap = require('wrapper-generator').wrap;
+var Joi = require('joi');
 
-var wrappedAPI = wrap({
+var api = wrap('https://api.github.com/users/mralexgray/repos', {
   // '/'
-  handles : {
-    POST : {
-      validate : {},
+  handlers : {
+    GET : {
+      validate : Joi.any(),
       handler : function() {},
     },
   },
   children : {
-
-  }
+    foo : {
+      // '/foo'
+      handlers : {
+        GET : {
+          validate : {},
+          handler : function() {},
+        },
+      },
+    },
+  },
 });
+
+api({
+    method : 'GET',
+  })
+  .then(function(response) {
+    console.log('Success', response);
+  })
+  .catch(function(err) {
+    console.error('!!Error: ', err);
+  });
 
 ```
