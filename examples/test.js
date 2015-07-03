@@ -1,14 +1,22 @@
-var generate = require('../dist/endpointGenerator').generate;
+var wrap = require('../dist').wrap;
+var Joi = require('joi');
 
-function base() {
-  console.log('BASE');
-}
+var api = wrap('https://api.github.com/users/mralexgray/repos', {
+  // '/'
+  handlers : {
+    GET : {
+      validate : Joi.any(),
+      handler : function() {},
+    },
+  },
+});
 
-function child() {
-  console.log('CHILD');
-}
-
-var base = generate(base, [child]);
-
-base(); // Prints BASE
-base().child(); // Prints CHILD
+api({
+    method : 'GET',
+  })
+  .then(function(response) {
+    console.log('Success', response);
+  })
+  .catch(function(err) {
+    console.error('!!Error: ', err);
+  });
