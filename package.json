@@ -1,6 +1,6 @@
 {
   "name": "wrapper-generator",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Wrapper Chainer Generator to simplify wrapper modules",
   "main": "dist/index.js",
   "repository": {
