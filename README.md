@@ -20,7 +20,9 @@ var api = wrap('https://api.github.com/users/mralexgray/repos', {
   handlers : {
     GET : {
       validate : Joi.any(),
-      handler : function() {},
+      handler : function(response) {
+        return response;
+      },
     },
   },
   children : {
@@ -29,7 +31,9 @@ var api = wrap('https://api.github.com/users/mralexgray/repos', {
       handlers : {
         GET : {
           validate : {},
-          handler : function() {},
+          handler : function(response) {
+            return response;
+          },
         },
       },
     },
