@@ -4,7 +4,8 @@ API Wrapper Generator
 
 # NOTE
 
-Not currently working
+Very rought state.
+Only tested with JSON API with non-parameter URLs.
 
 # Example - Wrap API
 
