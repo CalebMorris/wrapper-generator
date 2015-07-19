@@ -1,7 +1,7 @@
 var wrap = require('../dist').wrap;
 var Joi = require('joi');
 
-var api = wrap('https://api.github.com/users/mralexgray/repos', {
+var api = wrap('https://api.github.com/users/calebmorris/repos', {
   // '/'
   handlers : {
     GET : {
